@@ -7,7 +7,7 @@ class Assets {
   static const String controllersMusicImageNext = 'assets/images/controllers_music_image/next.png';
   static const String controllersMusicImagePause = 'assets/images/controllers_music_image/pause.png';
   static const String controllersMusicImageRandom = 'assets/images/controllers_music_image/random.png';
-  static const String controllersMusicImageSkip back = 'assets/images/controllers_music_image/back.png';
+  static const String back = 'assets/images/controllers_music_image/back.png';
   static const String imagesBottomNavImagesLeftAlignment = 'assets/images/bottom_nav_images/left_alignment.png';
   static const String imagesLogo = 'assets/images/logo.png';
   static const String imagesOnBoardingImage = 'assets/images/onBoardingImage.png';

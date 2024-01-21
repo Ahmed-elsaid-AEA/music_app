@@ -5,6 +5,7 @@ import 'package:music_apps/core/resources/color_managers.dart';
 import 'package:music_apps/core/resources/font_managers.dart';
 import 'package:music_apps/core/resources/height_values_managers.dart';
 import 'package:music_apps/core/resources/radius_values_managers.dart';
+import 'package:music_apps/features/play_music/widgets/cusotm_button_controller_play_music.dart';
 import 'package:music_apps/features/play_music/widgets/custom_app_bar_play_music_screen.dart';
 
 import '../widgets/custom_songs_details_play_music_screen.dart';
@@ -28,19 +29,20 @@ class PlayMusicScreen extends StatelessWidget {
               ColorManagers.kPrimaryColor,
               ColorManagers.kDarkBlueColor
             ])),
-        child: const SafeArea(
+        child: SafeArea(
           child: SizedBox(
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: HeightValuesManagers.h150,),
-              CustomSongsDetailsPlayMusic(),
-               Row(
-                 children: [
-Image(image: AssetImage(AssetsManagers.loop))
-                 ],
-               )
+                const SizedBox(
+                  height: HeightValuesManagers.h150,
+                ),
+                const CustomSongsDetailsPlayMusic(),
+              const SizedBox(
+                  height: 28,
+                ),
+                CustomButtonControllerPlayMusic()
               ],
             ),
           ),
@@ -49,4 +51,3 @@ Image(image: AssetImage(AssetsManagers.loop))
     );
   }
 }
-

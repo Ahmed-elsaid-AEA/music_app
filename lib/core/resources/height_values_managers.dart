@@ -4,7 +4,10 @@ class HeightValuesManagers{
   static const double h9=9;
   static const double h10=10;
   static const double h11=11;
+  static const double h20=20;
   static const double h22=22;
+  static const double h28=28;
+  static const double h36=36;
   static const double h58=58;
   static const double h60=60;
   static const double h111=111;

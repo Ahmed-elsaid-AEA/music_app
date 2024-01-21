@@ -1,7 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:music_apps/core/resources/assets_managers.dart';
 import 'package:music_apps/core/resources/color_managers.dart';
+import 'package:music_apps/core/resources/height_values_managers.dart';
+import 'package:music_apps/core/resources/radius_values_managers.dart';
+import 'package:music_apps/core/resources/width_values_managers.dart';
 
 class CustomButtonControllerPlayMusic extends StatelessWidget {
   const CustomButtonControllerPlayMusic({
@@ -13,46 +15,45 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Image(image: AssetImage(AssetsManagers.random)),
+        const Image(image: AssetImage(AssetsManagers.random)),
         Container(
-            width: 36,
-            height: 36,
+            width: WidthValuesManagers.w36,
+            height: HeightValuesManagers.h36,
             decoration: BoxDecoration(
-
-                borderRadius: BorderRadius.circular(50),
-                gradient: LinearGradient(
+                borderRadius: BorderRadius.circular(RadiusValuesManager.r50),
+                gradient: const LinearGradient(
                     begin: Alignment(0.00, -1.00),
                     end: Alignment(0, 1),
                     colors: [
                       ColorManagers.kThirdPrimaryColor,
                       ColorManagers.kLightWhiteColor,
                     ])),
-            child: Image(
-                height: 20,
-                width: 20,
+            child: const Image(
+                height: HeightValuesManagers.h20,
+                width: WidthValuesManagers.w20,
                 image: AssetImage(AssetsManagers.back))),
-        CircleAvatar(
-          radius: 30,
+        const CircleAvatar(
+          radius: RadiusValuesManager.r30,
           backgroundColor: ColorManagers.kLightWhiteColor,
           child: Image(image: AssetImage(AssetsManagers.pause)),
         ),
         Container(
-            width: 36,
-            height: 36,
+            width: HeightValuesManagers.h36,
+            height: WidthValuesManagers.w36,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                gradient: LinearGradient(
+                borderRadius: BorderRadius.circular(RadiusValuesManager.r50),
+                gradient: const LinearGradient(
                     begin: Alignment(0.00, -1.00),
                     end: Alignment(0, 1),
                     colors: [
                       ColorManagers.kThirdPrimaryColor,
                       ColorManagers.kLightWhiteColor,
                     ])),
-            child: Image(
-                height: 20,
-                width: 20,
+            child: const Image(
+                width: WidthValuesManagers.w20,
+                height: WidthValuesManagers.w20,
                 image: AssetImage(AssetsManagers.next))),
-        Image(image: AssetImage(AssetsManagers.loop)),
+        const Image(image: AssetImage(AssetsManagers.loop)),
       ],
     );
   }

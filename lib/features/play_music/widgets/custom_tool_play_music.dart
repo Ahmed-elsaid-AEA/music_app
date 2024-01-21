@@ -10,7 +10,7 @@ class CustomToolsPlayMusic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(7),
+      padding: const EdgeInsets.all(7),
       decoration: ShapeDecoration(
 
         shape: RoundedRectangleBorder(
@@ -18,8 +18,8 @@ class CustomToolsPlayMusic extends StatelessWidget {
         ),
         color: ColorManagers.kLightWhiteColor.withOpacity(.50),
       ),
-      margin: EdgeInsets.symmetric(horizontal: 89, vertical: 7),
-      child: Row(
+      margin: const EdgeInsets.symmetric(horizontal: 89, vertical: 7),
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Column(

@@ -49,7 +49,9 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
                 ),
                 CustomButtonControllerPlayMusic(
                   value: .6,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    print(value);
+                  },
                 ),
               ],
             ),

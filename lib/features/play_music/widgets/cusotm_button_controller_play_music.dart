@@ -7,10 +7,14 @@ import 'package:music_apps/core/resources/width_values_managers.dart';
 
 class CustomButtonControllerPlayMusic extends StatelessWidget {
   const CustomButtonControllerPlayMusic({
-    super.key, required this.onChanged, required this.value,
+    super.key,
+    required this.onChanged,
+    required this.value,
   });
+
   final ValueChanged<double> onChanged;
   final double value;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,7 +27,8 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
                 width: WidthValuesManagers.w36,
                 height: HeightValuesManagers.h36,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(RadiusValuesManager.r50),
+                    borderRadius:
+                        BorderRadius.circular(RadiusValuesManager.r50),
                     gradient: const LinearGradient(
                         begin: Alignment(0.00, -1.00),
                         end: Alignment(0, 1),
@@ -44,7 +49,8 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
                 width: HeightValuesManagers.h36,
                 height: WidthValuesManagers.w36,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(RadiusValuesManager.r50),
+                    borderRadius:
+                        BorderRadius.circular(RadiusValuesManager.r50),
                     gradient: const LinearGradient(
                         begin: Alignment(0.00, -1.00),
                         end: Alignment(0, 1),
@@ -59,12 +65,49 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
             const Image(image: AssetImage(AssetsManagers.loop)),
           ],
         ),
-        SizedBox(height: HeightValuesManagers.h29,),
-        Slider(value: .5, onChanged: onChanged,
+        const SizedBox(
+          height: HeightValuesManagers.h29,
+        ),
+        SliderTheme(data: SliderThemeData(
+         thumbShape: RoundSliderThumbShape()
+        ), child:Slider(
+
+          value: .5,
+          onChanged: onChanged,
           activeColor: ColorManagers.kLightWhiteColor,
-          inactiveColor: Color(0xff2F5D9A),
-        )
+          inactiveColor: const Color(0xff2F5D9A),
+        ), )
       ],
     );
+  }
+}
+
+class RoundSliderThumbShape extends SliderComponentShape {
+  @override
+  Size getPreferredSize(bool isEnabled, bool isDiscrete) {
+    return Size(16.0, 40.0); // Adjust the size of the thumb
+  }
+
+  @override
+  void paint(PaintingContext context, Offset center,
+      {required Animation<double> activationAnimation,
+      required Animation<double> enableAnimation,
+      required bool isDiscrete,
+      required TextPainter labelPainter,
+      required RenderBox parentBox,
+      required SliderThemeData sliderTheme,
+      required TextDirection textDirection,
+      required double value,
+      required double textScaleFactor,
+      required Size sizeWithOverflow}) {
+    final Canvas canvas = context.canvas;
+    final Paint paint = Paint()
+      ..color = ColorManagers.kLightWhiteColor
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = 2.0;
+
+    canvas.drawCircle(center, 3.0, paint); // Draw a circle as the thumb
+
+    // TODO: implement paint
   }
 }

@@ -86,8 +86,8 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
 
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 26,vertical: 7),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 26,vertical: 7),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

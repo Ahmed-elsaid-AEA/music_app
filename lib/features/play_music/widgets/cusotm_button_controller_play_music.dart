@@ -7,53 +7,63 @@ import 'package:music_apps/core/resources/width_values_managers.dart';
 
 class CustomButtonControllerPlayMusic extends StatelessWidget {
   const CustomButtonControllerPlayMusic({
-    super.key,
+    super.key, required this.onChanged, required this.value,
   });
-
+  final ValueChanged<double> onChanged;
+  final double value;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Column(
       children: [
-        const Image(image: AssetImage(AssetsManagers.random)),
-        Container(
-            width: WidthValuesManagers.w36,
-            height: HeightValuesManagers.h36,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(RadiusValuesManager.r50),
-                gradient: const LinearGradient(
-                    begin: Alignment(0.00, -1.00),
-                    end: Alignment(0, 1),
-                    colors: [
-                      ColorManagers.kThirdPrimaryColor,
-                      ColorManagers.kLightWhiteColor,
-                    ])),
-            child: const Image(
-                height: HeightValuesManagers.h20,
-                width: WidthValuesManagers.w20,
-                image: AssetImage(AssetsManagers.back))),
-        const CircleAvatar(
-          radius: RadiusValuesManager.r30,
-          backgroundColor: ColorManagers.kLightWhiteColor,
-          child: Image(image: AssetImage(AssetsManagers.pause)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Image(image: AssetImage(AssetsManagers.random)),
+            Container(
+                width: WidthValuesManagers.w36,
+                height: HeightValuesManagers.h36,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(RadiusValuesManager.r50),
+                    gradient: const LinearGradient(
+                        begin: Alignment(0.00, -1.00),
+                        end: Alignment(0, 1),
+                        colors: [
+                          ColorManagers.kThirdPrimaryColor,
+                          ColorManagers.kLightWhiteColor,
+                        ])),
+                child: const Image(
+                    height: HeightValuesManagers.h20,
+                    width: WidthValuesManagers.w20,
+                    image: AssetImage(AssetsManagers.back))),
+            const CircleAvatar(
+              radius: RadiusValuesManager.r30,
+              backgroundColor: ColorManagers.kLightWhiteColor,
+              child: Image(image: AssetImage(AssetsManagers.pause)),
+            ),
+            Container(
+                width: HeightValuesManagers.h36,
+                height: WidthValuesManagers.w36,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(RadiusValuesManager.r50),
+                    gradient: const LinearGradient(
+                        begin: Alignment(0.00, -1.00),
+                        end: Alignment(0, 1),
+                        colors: [
+                          ColorManagers.kThirdPrimaryColor,
+                          ColorManagers.kLightWhiteColor,
+                        ])),
+                child: const Image(
+                    width: WidthValuesManagers.w20,
+                    height: WidthValuesManagers.w20,
+                    image: AssetImage(AssetsManagers.next))),
+            const Image(image: AssetImage(AssetsManagers.loop)),
+          ],
         ),
-        Container(
-            width: HeightValuesManagers.h36,
-            height: WidthValuesManagers.w36,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(RadiusValuesManager.r50),
-                gradient: const LinearGradient(
-                    begin: Alignment(0.00, -1.00),
-                    end: Alignment(0, 1),
-                    colors: [
-                      ColorManagers.kThirdPrimaryColor,
-                      ColorManagers.kLightWhiteColor,
-                    ])),
-            child: const Image(
-                width: WidthValuesManagers.w20,
-                height: WidthValuesManagers.w20,
-                image: AssetImage(AssetsManagers.next))),
-        const Image(image: AssetImage(AssetsManagers.loop)),
+        SizedBox(height: HeightValuesManagers.h29,),
+        Slider(value: .5, onChanged: onChanged,
+          activeColor: ColorManagers.kLightWhiteColor,
+          inactiveColor: Color(0xff2F5D9A),
+        )
       ],
     );
   }

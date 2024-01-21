@@ -10,9 +10,14 @@ import 'package:music_apps/features/play_music/widgets/custom_app_bar_play_music
 
 import '../widgets/custom_songs_details_play_music_screen.dart';
 
-class PlayMusicScreen extends StatelessWidget {
+class PlayMusicScreen extends StatefulWidget {
   const PlayMusicScreen({super.key});
 
+  @override
+  State<PlayMusicScreen> createState() => _PlayMusicScreenState();
+}
+
+class _PlayMusicScreenState extends State<PlayMusicScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,20 +34,23 @@ class PlayMusicScreen extends StatelessWidget {
               ColorManagers.kPrimaryColor,
               ColorManagers.kDarkBlueColor
             ])),
-        child: const SafeArea(
+        child: SafeArea(
           child: SizedBox(
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: HeightValuesManagers.h150,
                 ),
-                CustomSongsDetailsPlayMusic(),
-              SizedBox(
-                  height: HeightValuesManagers.h28,
+                const CustomSongsDetailsPlayMusic(),
+                const SizedBox(
+                  height: HeightValuesManagers.h29,
                 ),
-                CustomButtonControllerPlayMusic()
+                CustomButtonControllerPlayMusic(
+                  value: .6,
+                  onChanged: (value) {},
+                ),
               ],
             ),
           ),

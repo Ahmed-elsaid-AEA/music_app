@@ -28,14 +28,19 @@ class PlayMusicScreen extends StatelessWidget {
               ColorManagers.kPrimaryColor,
               ColorManagers.kDarkBlueColor
             ])),
-        child: SafeArea(
-          child: Container(
+        child: const SafeArea(
+          child: SizedBox(
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: HeightValuesManagers.h150,),
-              CustomSongsDetailsPlayMusic()
+                SizedBox(height: HeightValuesManagers.h150,),
+              CustomSongsDetailsPlayMusic(),
+               Row(
+                 children: [
+Image(image: AssetImage(AssetsManagers.loop))
+                 ],
+               )
               ],
             ),
           ),

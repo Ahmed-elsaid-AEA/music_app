@@ -55,6 +55,7 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
                   height: HeightValuesManagers.h29,
                 ),
                 CustomButtonControllerPlayMusic(
+                  pathSong: songModel.pathSong,
                   value: .6,
                   onChanged: (value) {
                     print(value);

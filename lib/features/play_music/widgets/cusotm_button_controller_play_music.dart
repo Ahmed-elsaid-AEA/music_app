@@ -10,11 +10,12 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
   const CustomButtonControllerPlayMusic({
     super.key,
     required this.onChanged,
-    required this.value,
+    required this.value, required this.pathSong,
   });
 
   final ValueChanged<double> onChanged;
   final double value;
+  final String pathSong;
 
   @override
   Widget build(BuildContext context) {

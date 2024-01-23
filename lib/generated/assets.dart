@@ -3,12 +3,12 @@ class Assets {
   Assets._();
 
   static const String bottomNavImagesLeftAlignment = 'assets/images/bottom_nav_images/left_alignment.png';
-  static const String controllersMusicImageLoop = 'assets/images/controllers_music_image/loop.png';
-  static const String controllersMusicImageNext = 'assets/images/controllers_music_image/next.png';
-  static const String controllersMusicImagePause = 'assets/images/controllers_music_image/pause.png';
-  static const String controllersMusicImageRandom = 'assets/images/controllers_music_image/random.png';
-  static const String back = 'assets/images/controllers_music_image/back.png';
-  static const String imagesBottomNavImagesLeftAlignment = 'assets/images/bottom_nav_images/left_alignment.png';
+  static const String controllersButtonMusicImageBack = 'assets/images/controllers_button_music_image/back.png';
+  static const String controllersButtonMusicImageLoop = 'assets/images/controllers_button_music_image/loop.png';
+  static const String controllersButtonMusicImageNext = 'assets/images/controllers_button_music_image/next.png';
+  static const String controllersButtonMusicImagePause = 'assets/images/controllers_button_music_image/pause.png';
+  static const String controllersButtonMusicImageRandom = 'assets/images/controllers_button_music_image/random.png';
+  static const String imagesControllersButtonMusicImagePause = 'assets/images/controllers_button_music_image/pause.png';
   static const String imagesLogo = 'assets/images/logo.png';
   static const String imagesOnBoardingImage = 'assets/images/onBoardingImage.png';
   static const String imagesTest = 'assets/images/test.png';
@@ -18,8 +18,11 @@ class Assets {
   static const String orbitronOrbitronMedium = 'assets/fonts/Orbitron/Orbitron-Medium.ttf';
   static const String orbitronOrbitronRegular = 'assets/fonts/Orbitron/Orbitron-Regular.ttf';
   static const String orbitronOrbitronSemiBold = 'assets/fonts/Orbitron/Orbitron-SemiBold.ttf';
+  static const String quranAlGen = 'assets/audio/quran/alGen.mp3';
+  static const String quranAlmareg = 'assets/audio/quran/almareg.mp3';
   static const String quranImageQu1 = 'assets/images/quran_image/qu1.jpg';
   static const String quranImageQu2 = 'assets/images/quran_image/qu2.jpg';
   static const String quranImageQu3 = 'assets/images/quran_image/qu3.jpg';
+  static const String quranNoh = 'assets/audio/quran/noh.mp3';
 
 }

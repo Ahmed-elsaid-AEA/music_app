@@ -62,6 +62,13 @@ flutter:
   assets:
     - assets/images/
     - assets/images/controllers_button_music_image/pause.png
+    - assets/images/controllers_button_music_image/random.png
+    - assets/images/controllers_button_music_image/next.png
+    - assets/images/controllers_button_music_image/back.png
+    - assets/images/controllers_button_music_image/loop.png
+    - assets/images/quran_image/qu1.jpg
+    - assets/images/quran_image/qu2.jpg
+    - assets/images/quran_image/qu3.jpg
 
 
 

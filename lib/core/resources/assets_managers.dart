@@ -9,9 +9,9 @@ class AssetsManagers {
   static const String pause = "$pathImage/controllers_button_music_image/pause.png";
   static const String random = "$pathImage/controllers_button_music_image/random.png";
   static const String back = "$pathImage/controllers_button_music_image/back.png";
-  static const String alBaqara_mrashed = "$pathAudio/alBaqara.mp3";
-  static const String quarn_abdelRahman_ = "$pathAudio/alBaqara.mp3";
-  static const String alBaqara_eslamSobhey = "$pathAudio/alBaqara.mp3";
+  static const String alGen = "$pathAudio/alGen.mp3";
+  static const String almareg = "$pathAudio/almareg.mp3";
+  static const String noh = "$pathAudio/noh.mp3";
   static const String quranImageQu1 = 'assets/images/quran_image/qu1.jpg';
   static const String quranImageQu2 = 'assets/images/quran_image/qu2.jpg';
   static const String quranImageQu3 = 'assets/images/quran_image/qu3.jpg';

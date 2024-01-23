@@ -4,6 +4,7 @@ import 'package:music_apps/controller/home_page_controller.dart';
 import 'package:music_apps/core/resources/alignment_managers.dart';
 import 'package:music_apps/core/resources/assets_managers.dart';
 import 'package:music_apps/core/resources/color_managers.dart';
+import 'package:music_apps/core/resources/constants_value.dart';
 import 'package:music_apps/core/resources/font_managers.dart';
 import 'package:music_apps/core/resources/height_values_managers.dart';
 import 'package:music_apps/core/resources/routes_managers.dart';
@@ -50,11 +51,7 @@ class HomePage extends StatelessWidget {
                 HomePageController.navigatorToPlayMusicScreen(context: context);
               },
               itemCount: 3,
-              songsModel: SongsModel(
-                  image: "image",
-                  singer: "singer",
-                  song: "song",
-                  pathSong: "pathSong"),
+              listSongsModel:ConstantsValue.listQuarn,
             ),
             const CustomTitleHomePage(
               title: "Recommanded music",

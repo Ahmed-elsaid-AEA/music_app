@@ -12,10 +12,11 @@ import 'package:music_apps/models/songsModel.dart';
 class CustomSearchDetails extends StatelessWidget {
   const CustomSearchDetails({
     super.key,
-    required this.songsModel, required this.itemCount, required this.onTap,
+    required this.listSongsModel,
+    required this.itemCount, required this.onTap,
   });
 
-  final SongsModel songsModel;
+  final List<SongsModel> listSongsModel;
   final int itemCount;
   final GestureTapCallback onTap;
 
@@ -36,17 +37,17 @@ class CustomSearchDetails extends StatelessWidget {
                         ClipRRect(
                           borderRadius:
                               BorderRadius.circular(RadiusValuesManager.r10),
-                          child: const Image(
+                          child:  Image(
                               fit: BoxFit.cover,
                               height: HeightValuesManagers.h150,
                               width: WidthValuesManagers.w150,
-                              image: AssetImage(AssetsManagers.test)),
+                              image: AssetImage(listSongsModel[index].image)),
                         ),
                         const SizedBox(
                           height: HeightValuesManagers.h9,
                         ),
                         Text(
-                          songsModel.song,
+                          listSongsModel[index].song,
                           style: const TextStyle(
                               fontSize: FontSizeManagers.f15,
                               fontWeight: FontWeight.w500,
@@ -56,7 +57,7 @@ class CustomSearchDetails extends StatelessWidget {
                           height: HeightValuesManagers.h4,
                         ),
                         Text(
-                          songsModel.singer,
+                          listSongsModel[index].singer,
                           style: const TextStyle(
                               fontSize: FontSizeManagers.f12,
                               fontWeight: FontWeight.w500,

@@ -73,26 +73,35 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 26),
           child: SliderTheme(
             data: SliderThemeData(
-               thumbShape:RoundSliderThumbShape(),
-          overlayShape: SliderComponentShape.noOverlay
-            ),
+                thumbShape: RoundSliderThumbShape(),
+                overlayShape: SliderComponentShape.noOverlay),
             child: Slider(
-
               value: .5,
               onChanged: onChanged,
               activeColor: ColorManagers.kLightWhiteColor,
               inactiveColor: const Color(0xff2F5D9A),
             ),
-
           ),
         ),
         const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 26,vertical: 7),
+          padding: EdgeInsets.symmetric(horizontal: 26, vertical: 7),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("2:03",style: TextStyle(color: ColorManagers.kLightWhiteColor,fontSize: FontSizeManagers.f12,fontWeight: FontWeight.w500),)
-              ,Text("4:03",style: TextStyle(color: ColorManagers.kLightWhiteColor,fontSize: FontSizeManagers.f12,fontWeight: FontWeight.w500),)
+              Text(
+                "2:03",
+                style: TextStyle(
+                    color: ColorManagers.kLightWhiteColor,
+                    fontSize: FontSizeManagers.f12,
+                    fontWeight: FontWeight.w500),
+              ),
+              Text(
+                "4:03",
+                style: TextStyle(
+                    color: ColorManagers.kLightWhiteColor,
+                    fontSize: FontSizeManagers.f12,
+                    fontWeight: FontWeight.w500),
+              )
             ],
           ),
         )
@@ -104,7 +113,7 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
 class RoundSliderThumbShape extends SliderComponentShape {
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
-    return Size(0.0, 0.0); // Adjust the size of the thumb
+    return const Size(0.0, 0.0); // Adjust the size of the thumb
   }
 
   @override

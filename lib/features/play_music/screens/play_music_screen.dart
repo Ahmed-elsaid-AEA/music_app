@@ -19,14 +19,13 @@ class PlayMusicScreen extends StatefulWidget {
 }
 
 class _PlayMusicScreenState extends State<PlayMusicScreen> {
-
-
   @override
   Widget build(BuildContext context) {
-SongsModel model=ModalRoute.of(context)!.settings.arguments as SongsModel;
+    SongsModel songModel =
+        ModalRoute.of(context)!.settings.arguments as SongsModel;
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar:   CustomAppBarPlayMusicScreen(
+      appBar: CustomAppBarPlayMusicScreen(
         onPressed: () {
           PlayMusicController.navigatorPop(context: context);
         },
@@ -49,8 +48,9 @@ SongsModel model=ModalRoute.of(context)!.settings.arguments as SongsModel;
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Spacer(),
-                Text("${model.image}",style: TextStyle(color: ColorManagers.kWhiteColor,fontSize: 20),),
-                const CustomSongsDetailsPlayMusic(),
+                CustomSongsDetailsPlayMusic(
+                  songsModel: songModel,
+                ),
                 const SizedBox(
                   height: HeightValuesManagers.h29,
                 ),

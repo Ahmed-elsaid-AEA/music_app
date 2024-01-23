@@ -18,7 +18,7 @@ class CustomSearchDetails extends StatelessWidget {
 
   final List<SongsModel> listSongsModel;
   final int itemCount;
-  final GestureTapCallback onTap;
+  final Function(SongsModel songsModel) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,9 @@ class CustomSearchDetails extends StatelessWidget {
         child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => GestureDetector(
-              onTap: onTap,
+              onTap: () {
+                onTap(listSongsModel[index]);
+              },
               child: Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

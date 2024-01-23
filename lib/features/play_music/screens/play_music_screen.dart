@@ -6,6 +6,7 @@ import 'package:music_apps/core/resources/height_values_managers.dart';
 import 'package:music_apps/features/play_music/widgets/cusotm_button_controller_play_music.dart';
 import 'package:music_apps/features/play_music/widgets/custom_app_bar_play_music_screen.dart';
 import 'package:music_apps/features/play_music/widgets/custom_tool_play_music.dart';
+import 'package:music_apps/models/songsModel.dart';
 
 import '../widgets/custom_songs_details_play_music_screen.dart';
 import '../widgets/custom_tool_2_play_music.dart';
@@ -22,7 +23,7 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+SongsModel model=ModalRoute.of(context)!.settings.arguments as SongsModel;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar:   CustomAppBarPlayMusicScreen(
@@ -48,6 +49,7 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Spacer(),
+                Text("${model.image}",style: TextStyle(color: ColorManagers.kWhiteColor,fontSize: 20),),
                 const CustomSongsDetailsPlayMusic(),
                 const SizedBox(
                   height: HeightValuesManagers.h29,

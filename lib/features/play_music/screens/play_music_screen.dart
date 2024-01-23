@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_apps/controller/play_music_controller.dart';
 import 'package:music_apps/core/resources/alignment_managers.dart';
 import 'package:music_apps/core/resources/color_managers.dart';
 import 'package:music_apps/core/resources/height_values_managers.dart';
@@ -17,11 +18,18 @@ class PlayMusicScreen extends StatefulWidget {
 }
 
 class _PlayMusicScreenState extends State<PlayMusicScreen> {
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const CustomAppBarPlayMusicScreen(),
+      appBar:   CustomAppBarPlayMusicScreen(
+        onPressed: () {
+          PlayMusicController.navigatorPop(context: context);
+        },
+      ),
       body: Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -39,8 +47,7 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Spacer(),
-
+                const Spacer(),
                 const CustomSongsDetailsPlayMusic(),
                 const SizedBox(
                   height: HeightValuesManagers.h29,

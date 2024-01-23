@@ -6,8 +6,9 @@ import 'package:music_apps/core/resources/width_values_managers.dart';
 
 class CustomAppBarPlayMusicScreen extends StatelessWidget implements PreferredSizeWidget{
   const CustomAppBarPlayMusicScreen({
-    super.key,
+    super.key, required this.onPressed,
   });
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,11 @@ class CustomAppBarPlayMusicScreen extends StatelessWidget implements PreferredSi
       title: const Text(StringsValuesManagers.nowPlaying
         ,style: TextStyle(color: ColorManagers.kWhiteColor,fontSize: FontSizeManagers.f18,fontWeight: FontWeight.w500),),
       centerTitle: true,
-      leading: const Icon(Icons.arrow_left,color: ColorManagers.kWhiteColor,size: FontSizeManagers.f30,),
+      leading: IconButton(
+        onPressed:onPressed,
+        icon: const Icon(Icons.arrow_left,
+          color: ColorManagers.kWhiteColor,size: FontSizeManagers.f30,),
+      ),
       backgroundColor: Colors.transparent,
     );
   }

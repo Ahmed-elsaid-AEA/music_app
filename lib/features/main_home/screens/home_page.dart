@@ -20,12 +20,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     return SafeArea(
         child: Container(
-
       decoration: const BoxDecoration(
-
           gradient: LinearGradient(
               begin: Alignment(
                   AlignmentManagersX.x0_20, AlignmentManagersY.y_0_98),
@@ -48,10 +45,12 @@ class HomePage extends StatelessWidget {
             ),
             CustomSearchDetails(
               onTap: () {
-                HomePageController.navigatorToPlayMusicScreen(context: context);
+                HomePageController.navigatorToPlayMusicScreen(
+                    context: context);
               },
+
               itemCount: 3,
-              listSongsModel:ConstantsValue.listQuarn,
+              listSongsModel: ConstantsValue.listQuarn,
             ),
             const CustomTitleHomePage(
               title: "Recommanded music",
@@ -67,7 +66,8 @@ class HomePage extends StatelessWidget {
                       ),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) => const CustomRowRecommendedMusic(),
+                  itemBuilder: (context, index) =>
+                      const CustomRowRecommendedMusic(),
                   itemCount: 20),
             )
           ],

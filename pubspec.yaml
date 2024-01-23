@@ -61,6 +61,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/audio/quran/alGen.mp3
+    - assets/audio/quran/almareg.mp3
+    - assets/audio/quran/noh.mp3
     - assets/images/
     - assets/images/controllers_button_music_image/pause.png
     - assets/images/controllers_button_music_image/random.png

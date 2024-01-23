@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:music_apps/core/resources/assets_managers.dart';
 import 'package:music_apps/core/resources/color_managers.dart';
@@ -17,8 +18,11 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
   final double value;
   final String pathSong;
 
+
+
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
         Row(

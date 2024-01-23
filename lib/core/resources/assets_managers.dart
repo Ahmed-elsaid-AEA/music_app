@@ -1,6 +1,6 @@
 class AssetsManagers {
   static const String pathImage = "assets/images";
-  static const String pathAudio = "assets/audio/qoran";
+  static const String pathAudio = "assets/audio/quran";
   static const String logo = "$pathImage/logo.png";
   static const String onBoardingImage = "$pathImage/onBoardingImage.png";
   static const String test = "$pathImage/test.png";

@@ -1,4 +1,5 @@
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:music_apps/core/resources/assets_managers.dart';
 import 'package:music_apps/core/resources/color_managers.dart';
@@ -7,7 +8,7 @@ import 'package:music_apps/core/resources/height_values_managers.dart';
 import 'package:music_apps/core/resources/radius_values_managers.dart';
 import 'package:music_apps/core/resources/width_values_managers.dart';
 
-class CustomButtonControllerPlayMusic extends StatelessWidget {
+class CustomButtonControllerPlayMusic extends StatefulWidget {
   const CustomButtonControllerPlayMusic({
     super.key,
     required this.onChanged,
@@ -18,7 +19,25 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
   final double value;
   final String pathSong;
 
+  @override
+  State<CustomButtonControllerPlayMusic> createState() => _CustomButtonControllerPlayMusicState();
+}
 
+class _CustomButtonControllerPlayMusicState extends State<CustomButtonControllerPlayMusic> {
+void playAudio()async{
+  AudioCache _aduioCache=AudioCache(prefix: '');
+  Uri uri=await _aduioCache.load(widget.pathSong);
+  AudioPlayer _audioPlayer=AudioPlayer();
+  if(_audioPlayer.state==PlayerState.stopped)
+  _audioPlayer.play(UrlSource(uri.toString()));
+}
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    playAudio();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +101,7 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
                 overlayShape: SliderComponentShape.noOverlay),
             child: Slider(
               value: .5,
-              onChanged: onChanged,
+              onChanged: widget.onChanged,
               activeColor: ColorManagers.kLightWhiteColor,
               inactiveColor: const Color(0xff2F5D9A),
             ),

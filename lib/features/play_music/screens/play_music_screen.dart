@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:music_apps/controller/play_music_controller.dart';
 import 'package:music_apps/core/resources/alignment_managers.dart';
@@ -19,6 +20,9 @@ class PlayMusicScreen extends StatefulWidget {
 }
 
 class _PlayMusicScreenState extends State<PlayMusicScreen> {
+
+
+
   @override
   Widget build(BuildContext context) {
     SongsModel songModel =

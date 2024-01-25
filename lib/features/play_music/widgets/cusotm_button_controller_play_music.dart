@@ -137,7 +137,7 @@ class _CustomButtonControllerPlayMusicState
                     fontSize: FontSizeManagers.f12,
                     fontWeight: FontWeight.w500),
               ),
-              StreamBuilder<Duration?>(
+              StreamBuilder<String>(
                 stream: _playMusicController.outputDataMusicTime,
                 builder: (context, snapshot) =>  Text(
                   "${snapshot.data}",

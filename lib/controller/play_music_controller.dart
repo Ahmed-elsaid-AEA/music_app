@@ -14,9 +14,9 @@ class PlayMusicController {
   late StreamController<bool> streamControllerMusicImageStatus;
   late Sink<bool> inputDataMusicImageStatus;
   late Stream<bool> outputDataMusicImageStatus;
-  late StreamController<Duration> streamControllerMusicTime;
-  late Sink<Duration> inputDataMusicTime;
-  late Stream<Duration> outputDataMusicTime;
+  late StreamController<String> streamControllerMusicTime;
+  late Sink<String> inputDataMusicTime;
+  late Stream<String> outputDataMusicTime;
 
   PlayMusicController(this.pathSong) {
     _audioPlayer = AudioPlayer();
@@ -33,11 +33,13 @@ class PlayMusicController {
     AudioCache _aduioCache = AudioCache(prefix: '');
     Uri uri = await _aduioCache.load(pathSong);
     if (_audioPlayer.state == PlayerState.stopped) {
-    await  _audioPlayer.play(UrlSource(uri.toString()));
+      await _audioPlayer.play(UrlSource(uri.toString()));
       isPlaying = true;
       streamControllerMusicImageStatus.add(isPlaying);
-      Duration? duration=await _audioPlayer.getDuration();
-      streamControllerMusicTime.add(duration!);
+      Duration? duration = await _audioPlayer.getDuration();
+
+      streamControllerMusicTime
+          .add(transferDurationToSecondAndMinute(duration!));
     }
   }
 
@@ -57,5 +59,14 @@ class PlayMusicController {
       isPlaying = false;
       streamControllerMusicImageStatus.add(isPlaying);
     }
+  }
+
+  String transferDurationToSecondAndMinute(Duration dur) {
+// 0:05:43:12900
+// String dur="0:05:43:12900";
+
+    String secondDur = dur.inSeconds.remainder(60).toString().padLeft(2, "0");
+    String minuteDur = dur.inMinutes.remainder(60).toString().padLeft(2, "0");
+    return "${minuteDur}:${secondDur}";
   }
 }

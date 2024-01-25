@@ -1,6 +1,6 @@
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:music_apps/controller/play_music_controller.dart';
 import 'package:music_apps/core/resources/assets_managers.dart';
 import 'package:music_apps/core/resources/color_managers.dart';
 import 'package:music_apps/core/resources/font_managers.dart';
@@ -12,7 +12,8 @@ class CustomButtonControllerPlayMusic extends StatefulWidget {
   const CustomButtonControllerPlayMusic({
     super.key,
     required this.onChanged,
-    required this.value, required this.pathSong,
+    required this.value,
+    required this.pathSong,
   });
 
   final ValueChanged<double> onChanged;
@@ -20,28 +21,30 @@ class CustomButtonControllerPlayMusic extends StatefulWidget {
   final String pathSong;
 
   @override
-  State<CustomButtonControllerPlayMusic> createState() => _CustomButtonControllerPlayMusicState();
+  State<CustomButtonControllerPlayMusic> createState() =>
+      _CustomButtonControllerPlayMusicState();
 }
 
-class _CustomButtonControllerPlayMusicState extends State<CustomButtonControllerPlayMusic> {
-void playAudio()async{
-  AudioCache _aduioCache=AudioCache(prefix: '');
-  Uri uri=await _aduioCache.load(widget.pathSong);
-  AudioPlayer _audioPlayer=AudioPlayer();
-  if(_audioPlayer.state==PlayerState.stopped)
-  _audioPlayer.play(UrlSource(uri.toString()));
-}
+class _CustomButtonControllerPlayMusicState
+    extends State<CustomButtonControllerPlayMusic> {
+  late PlayMusicController _playMusicController;
 
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    playAudio();
+  _playMusicController=PlayMusicController(widget.pathSong);
+    _playMusicController.initAudio();
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _playMusicController.disposeAudio();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         Row(
@@ -65,10 +68,15 @@ void playAudio()async{
                     height: HeightValuesManagers.h20,
                     width: WidthValuesManagers.w20,
                     image: AssetImage(AssetsManagers.back))),
-            const CircleAvatar(
-              radius: RadiusValuesManager.r30,
-              backgroundColor: ColorManagers.kLightWhiteColor,
-              child: Image(image: AssetImage(AssetsManagers.pause)),
+            InkWell(
+              onTap: () {
+                _playMusicController.pauseAndResumeAudio();
+              },
+              child: const CircleAvatar(
+                radius: RadiusValuesManager.r30,
+                backgroundColor: ColorManagers.kLightWhiteColor,
+                child: Image(image: AssetImage(AssetsManagers.pause)),
+              ),
             ),
             Container(
                 width: HeightValuesManagers.h36,

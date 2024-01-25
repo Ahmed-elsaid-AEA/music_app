@@ -72,18 +72,20 @@ class _CustomButtonControllerPlayMusicState
             InkWell(
               onTap: () {
                 _playMusicController.pauseAndResumeAudio();
-                setState(() {
-
-                });
+                setState(() {});
               },
-              child:  CircleAvatar(
+              child: CircleAvatar(
                 radius: RadiusValuesManager.r30,
                 backgroundColor: ColorManagers.kLightWhiteColor,
-                child: Image(
-                  width: 30,height: 30,
-                    image: AssetImage(_playMusicController.isPlaying == true
-                        ? AssetsManagers.pause
-                        : AssetsManagers.play)),
+                child: StreamBuilder<bool>(
+                  stream: _playMusicController.outputDataMusicImageStatus,
+                  builder: (context, snapshot) => Image(
+                      width: 30,
+                      height: 30,
+                      image: AssetImage(snapshot.data == true
+                          ? AssetsManagers.pause
+                          : AssetsManagers.play)),
+                ),
               ),
             ),
             Container(
@@ -123,25 +125,28 @@ class _CustomButtonControllerPlayMusicState
             ),
           ),
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: 26, vertical: 7),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 "2:03",
                 style: TextStyle(
                     color: ColorManagers.kLightWhiteColor,
                     fontSize: FontSizeManagers.f12,
                     fontWeight: FontWeight.w500),
               ),
-              Text(
-                "4:03",
-                style: TextStyle(
-                    color: ColorManagers.kLightWhiteColor,
-                    fontSize: FontSizeManagers.f12,
-                    fontWeight: FontWeight.w500),
-              )
+              StreamBuilder<Duration?>(
+                stream: _playMusicController.outputDataMusicTime,
+                builder: (context, snapshot) =>  Text(
+                  "${snapshot.data}",
+                  style: TextStyle(
+                      color: ColorManagers.kLightWhiteColor,
+                      fontSize: FontSizeManagers.f12,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
             ],
           ),
         )

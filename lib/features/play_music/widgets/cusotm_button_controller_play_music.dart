@@ -33,9 +33,10 @@ class _CustomButtonControllerPlayMusicState
   void initState() {
     // TODO: implement initState
     super.initState();
-  _playMusicController=PlayMusicController(widget.pathSong);
+    _playMusicController = PlayMusicController(widget.pathSong);
     _playMusicController.initAudio();
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -71,11 +72,18 @@ class _CustomButtonControllerPlayMusicState
             InkWell(
               onTap: () {
                 _playMusicController.pauseAndResumeAudio();
+                setState(() {
+
+                });
               },
-              child: const CircleAvatar(
+              child:  CircleAvatar(
                 radius: RadiusValuesManager.r30,
                 backgroundColor: ColorManagers.kLightWhiteColor,
-                child: Image(image: AssetImage(AssetsManagers.pause)),
+                child: Image(
+                  width: 30,height: 30,
+                    image: AssetImage(_playMusicController.isPlaying == true
+                        ? AssetsManagers.pause
+                        : AssetsManagers.play)),
               ),
             ),
             Container(

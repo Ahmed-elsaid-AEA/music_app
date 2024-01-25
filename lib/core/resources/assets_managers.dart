@@ -9,6 +9,7 @@ class AssetsManagers {
   static const String pause = "$pathImage/controllers_button_music_image/pause.png";
   static const String random = "$pathImage/controllers_button_music_image/random.png";
   static const String back = "$pathImage/controllers_button_music_image/back.png";
+  static const String play = "$pathImage/controllers_button_music_image/play.png";
   static const String alGen = "$pathAudio/alGen.mp3";
   static const String almareg = "$pathAudio/almareg.mp3";
   static const String noh = "$pathAudio/noh.mp3";

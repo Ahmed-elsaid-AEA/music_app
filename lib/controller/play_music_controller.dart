@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +10,11 @@ class PlayMusicController {
 
   late AudioPlayer _audioPlayer;
   String pathSong;
+  late bool isPlaying;
 
   PlayMusicController(this.pathSong) {
     _audioPlayer = AudioPlayer();
+    isPlaying=true;
   }
 
   void initAudio() async {
@@ -22,14 +26,17 @@ class PlayMusicController {
   }
 
   void disposeAudio() {
+    isPlaying=false;
     _audioPlayer.dispose();
   }
 
   void pauseAndResumeAudio() {
     if (_audioPlayer.state == PlayerState.paused) {
       _audioPlayer.resume();
+      isPlaying=true;
     } else if (_audioPlayer.state == PlayerState.playing) {
       _audioPlayer.pause();
+      isPlaying=false;
     }
   }
 }

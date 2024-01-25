@@ -11,6 +11,7 @@ class PlayMusicController {
   late AudioPlayer _audioPlayer;
   String pathSong;
   late bool isPlaying;
+  late bool loop;
   late StreamController<bool> streamControllerMusicImageStatus;
   late Sink<bool> inputDataMusicImageStatus;
   late Stream<bool> outputDataMusicImageStatus;
@@ -23,6 +24,9 @@ class PlayMusicController {
   late StreamController<double> streamControllerSliderMusicDurationNow;
   late Sink<double> inputDataSliderMusicDurationNow;
   late Stream<double> outputDataSliderMusicDurationNow;
+  late StreamController<bool> streamControllerLoop;
+  late Sink<bool> inputDataLoop;
+  late Stream<bool> outputDataLoop;
   late Duration durationOfMusic;
 
   PlayMusicController(this.pathSong) {
@@ -42,6 +46,10 @@ class PlayMusicController {
         streamControllerSliderMusicDurationNow.sink;
     outputDataSliderMusicDurationNow =
         streamControllerSliderMusicDurationNow.stream;
+    streamControllerLoop = StreamController();
+    inputDataLoop = streamControllerLoop.sink;
+    outputDataLoop = streamControllerLoop.stream;
+    loop=false;
   }
 
   void initAudio() async {
@@ -125,5 +133,15 @@ class PlayMusicController {
     Duration reversedDuration = Duration(seconds: totalSeconds.round());
 
     return reversedDuration;
+  }
+
+  void audioLoop() {
+    if (_audioPlayer.releaseMode == ReleaseMode.loop) {
+      _audioPlayer.setReleaseMode(ReleaseMode.release);
+      streamControllerLoop.add(false);
+    } else {
+      _audioPlayer.setReleaseMode(ReleaseMode.loop);
+      streamControllerLoop.add(true);
+    }
   }
 }

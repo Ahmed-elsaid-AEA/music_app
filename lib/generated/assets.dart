@@ -8,6 +8,7 @@ class Assets {
   static const String bottomNavImagesLeftAlignment = 'assets/images/bottom_nav_images/left_alignment.png';
   static const String controllersButtonMusicImageBack = 'assets/images/controllers_button_music_image/back.png';
   static const String controllersButtonMusicImageLoop = 'assets/images/controllers_button_music_image/loop.png';
+  static const String controllersButtonMusicImageLoopActive = 'assets/images/controllers_button_music_image/loop_active.png';
   static const String controllersButtonMusicImageNext = 'assets/images/controllers_button_music_image/next.png';
   static const String controllersButtonMusicImagePause = 'assets/images/controllers_button_music_image/pause.png';
   static const String controllersButtonMusicImagePlay = 'assets/images/controllers_button_music_image/play.png';

@@ -72,7 +72,6 @@ class _CustomButtonControllerPlayMusicState
             InkWell(
               onTap: () {
                 _playMusicController.pauseAndResumeAudio();
-                setState(() {});
               },
               child: CircleAvatar(
                 radius: RadiusValuesManager.r30,
@@ -105,7 +104,18 @@ class _CustomButtonControllerPlayMusicState
                     width: WidthValuesManagers.w20,
                     height: WidthValuesManagers.w20,
                     image: AssetImage(AssetsManagers.next))),
-            const Image(image: AssetImage(AssetsManagers.loop)),
+            InkWell(
+              onTap: () {
+                _playMusicController.audioLoop();
+              },
+              child: StreamBuilder(
+                  stream: _playMusicController.outputDataLoop,
+                  builder: (context, snapshot) => Image(
+                    width: 30,height: 30,
+                      image: AssetImage(snapshot.data == true
+                          ? AssetsManagers.loopActive
+                          : AssetsManagers.loopUnActive))),
+            ),
           ],
         ),
         const SizedBox(
@@ -117,11 +127,11 @@ class _CustomButtonControllerPlayMusicState
             stream: _playMusicController.outputDataSliderMusicDurationNow,
             builder: (context, snapshot) => SliderTheme(
               data: SliderThemeData(
-                  thumbShape: RoundSliderThumbShape(),
+                  // thumbShape: RoundSliderThumbShape(),
                   overlayShape: SliderComponentShape.noOverlay),
               child: Slider(
                 value: snapshot.data == null ? 0 : snapshot.data!,
-                onChanged:(value) {
+                onChanged: (value) {
                   _playMusicController.seekAudio(value);
                 },
                 activeColor: ColorManagers.kLightWhiteColor,
@@ -149,7 +159,7 @@ class _CustomButtonControllerPlayMusicState
                 stream: _playMusicController.outputDataMusicTime,
                 builder: (context, snapshot) => Text(
                   "${snapshot.data}",
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: ColorManagers.kLightWhiteColor,
                       fontSize: FontSizeManagers.f12,
                       fontWeight: FontWeight.w500),

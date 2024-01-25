@@ -66,6 +66,7 @@ flutter:
     - assets/audio/quran/almareg.mp3
     - assets/audio/quran/noh.mp3
     - assets/images/
+    - assets/images/controllers_button_music_image/loop_active.png
     - assets/images/controllers_button_music_image/pause.png
     - assets/images/controllers_button_music_image/random.png
     - assets/images/controllers_button_music_image/next.png

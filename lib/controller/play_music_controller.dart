@@ -17,6 +17,9 @@ class PlayMusicController {
   late StreamController<String> streamControllerMusicTime;
   late Sink<String> inputDataMusicTime;
   late Stream<String> outputDataMusicTime;
+  late StreamController<String> streamControllerMusicDurationNow;
+  late Sink<String> inputDataMusicDurationNow;
+  late Stream<String> outputDataMusicDurationNow;
 
   PlayMusicController(this.pathSong) {
     _audioPlayer = AudioPlayer();
@@ -27,6 +30,9 @@ class PlayMusicController {
     streamControllerMusicTime = StreamController();
     inputDataMusicTime = streamControllerMusicTime.sink;
     outputDataMusicTime = streamControllerMusicTime.stream;
+    streamControllerMusicDurationNow = StreamController();
+    inputDataMusicDurationNow = streamControllerMusicDurationNow.sink;
+    outputDataMusicDurationNow = streamControllerMusicDurationNow.stream;
   }
 
   void initAudio() async {
@@ -40,6 +46,10 @@ class PlayMusicController {
 
       streamControllerMusicTime
           .add(transferDurationToSecondAndMinute(duration!));
+      _audioPlayer.onPositionChanged.listen((event) {
+        streamControllerMusicDurationNow.add(
+            transferDurationToSecondAndMinute(event!));
+      });
     }
   }
 

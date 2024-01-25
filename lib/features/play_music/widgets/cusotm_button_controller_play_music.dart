@@ -130,12 +130,15 @@ class _CustomButtonControllerPlayMusicState
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                "2:03",
-                style: TextStyle(
-                    color: ColorManagers.kLightWhiteColor,
-                    fontSize: FontSizeManagers.f12,
-                    fontWeight: FontWeight.w500),
+              StreamBuilder<String>(
+                stream: _playMusicController.outputDataMusicDurationNow,
+                builder: (context, snapshot) =>  Text(
+                  "${snapshot.data}",
+                  style: const TextStyle(
+                      color: ColorManagers.kLightWhiteColor,
+                      fontSize: FontSizeManagers.f12,
+                      fontWeight: FontWeight.w500),
+                ),
               ),
               StreamBuilder<String>(
                 stream: _playMusicController.outputDataMusicTime,

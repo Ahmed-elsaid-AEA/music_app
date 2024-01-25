@@ -23,6 +23,7 @@ class PlayMusicController {
   late StreamController<double> streamControllerSliderMusicDurationNow;
   late Sink<double> inputDataSliderMusicDurationNow;
   late Stream<double> outputDataSliderMusicDurationNow;
+  late Duration durationOfMusic;
 
   PlayMusicController(this.pathSong) {
     _audioPlayer = AudioPlayer();
@@ -37,8 +38,10 @@ class PlayMusicController {
     inputDataMusicDurationNow = streamControllerMusicDurationNow.sink;
     outputDataMusicDurationNow = streamControllerMusicDurationNow.stream;
     streamControllerSliderMusicDurationNow = StreamController();
-    inputDataSliderMusicDurationNow = streamControllerSliderMusicDurationNow.sink;
-    outputDataSliderMusicDurationNow = streamControllerSliderMusicDurationNow.stream;
+    inputDataSliderMusicDurationNow =
+        streamControllerSliderMusicDurationNow.sink;
+    outputDataSliderMusicDurationNow =
+        streamControllerSliderMusicDurationNow.stream;
   }
 
   void initAudio() async {
@@ -49,21 +52,17 @@ class PlayMusicController {
       isPlaying = true;
       streamControllerMusicImageStatus.add(isPlaying);
       Duration? duration = await _audioPlayer.getDuration();
-
+      durationOfMusic = duration!;
       streamControllerMusicTime
           .add(transferDurationToSecondAndMinute(duration!));
       _audioPlayer.onPositionChanged.listen((event) {
-
         streamControllerMusicDurationNow
             .add(transferDurationToSecondAndMinute(event));
         streamControllerSliderMusicDurationNow
             .add(durationToSliderValue(event, duration));
-
-        });
+      });
     }
   }
-
-
 
   double durationToSliderValue(Duration duration, Duration maxDuration) {
     // Calculate the total duration in seconds
@@ -106,5 +105,25 @@ class PlayMusicController {
     String secondDur = dur.inSeconds.remainder(60).toString().padLeft(2, "0");
     String minuteDur = dur.inMinutes.remainder(60).toString().padLeft(2, "0");
     return "${minuteDur}:${secondDur}";
+  }
+
+  void seekAudio(double sliderValue) {
+    Duration durSeek = sliderValueToDuration(sliderValue, durationOfMusic);
+    _audioPlayer.seek(durSeek);
+    streamControllerSliderMusicDurationNow
+        .add(durationToSliderValue(durSeek, durationOfMusic));
+  }
+
+  Duration sliderValueToDuration(double sliderValue, Duration maxDuration) {
+    // Calculate the maximum duration in seconds
+    double maxSeconds = maxDuration.inSeconds.toDouble();
+
+    // Reverse the normalization to get the total seconds
+    double totalSeconds = sliderValue * maxSeconds;
+
+    // Create a new Duration object from the total seconds
+    Duration reversedDuration = Duration(seconds: totalSeconds.round());
+
+    return reversedDuration;
   }
 }

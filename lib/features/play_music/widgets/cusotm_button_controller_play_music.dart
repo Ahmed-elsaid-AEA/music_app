@@ -121,7 +121,9 @@ class _CustomButtonControllerPlayMusicState
                   overlayShape: SliderComponentShape.noOverlay),
               child: Slider(
                 value: snapshot.data == null ? 0 : snapshot.data!,
-                onChanged: widget.onChanged,
+                onChanged:(value) {
+                  _playMusicController.seekAudio(value);
+                },
                 activeColor: ColorManagers.kLightWhiteColor,
                 inactiveColor: const Color(0xff2F5D9A),
               ),

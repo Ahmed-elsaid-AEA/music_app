@@ -113,15 +113,18 @@ class _CustomButtonControllerPlayMusicState
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 26),
-          child: SliderTheme(
-            data: SliderThemeData(
-                thumbShape: RoundSliderThumbShape(),
-                overlayShape: SliderComponentShape.noOverlay),
-            child: Slider(
-              value: .5,
-              onChanged: widget.onChanged,
-              activeColor: ColorManagers.kLightWhiteColor,
-              inactiveColor: const Color(0xff2F5D9A),
+          child: StreamBuilder(
+            stream: _playMusicController.outputDataSliderMusicDurationNow,
+            builder: (context, snapshot) => SliderTheme(
+              data: SliderThemeData(
+                  thumbShape: RoundSliderThumbShape(),
+                  overlayShape: SliderComponentShape.noOverlay),
+              child: Slider(
+                value: snapshot.data == null ? 0 : snapshot.data!,
+                onChanged: widget.onChanged,
+                activeColor: ColorManagers.kLightWhiteColor,
+                inactiveColor: const Color(0xff2F5D9A),
+              ),
             ),
           ),
         ),
@@ -132,7 +135,7 @@ class _CustomButtonControllerPlayMusicState
             children: [
               StreamBuilder<String>(
                 stream: _playMusicController.outputDataMusicDurationNow,
-                builder: (context, snapshot) =>  Text(
+                builder: (context, snapshot) => Text(
                   "${snapshot.data}",
                   style: const TextStyle(
                       color: ColorManagers.kLightWhiteColor,
@@ -142,7 +145,7 @@ class _CustomButtonControllerPlayMusicState
               ),
               StreamBuilder<String>(
                 stream: _playMusicController.outputDataMusicTime,
-                builder: (context, snapshot) =>  Text(
+                builder: (context, snapshot) => Text(
                   "${snapshot.data}",
                   style: TextStyle(
                       color: ColorManagers.kLightWhiteColor,

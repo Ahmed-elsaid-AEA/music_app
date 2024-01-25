@@ -20,6 +20,9 @@ class PlayMusicController {
   late StreamController<String> streamControllerMusicDurationNow;
   late Sink<String> inputDataMusicDurationNow;
   late Stream<String> outputDataMusicDurationNow;
+  late StreamController<double> streamControllerSliderMusicDurationNow;
+  late Sink<double> inputDataSliderMusicDurationNow;
+  late Stream<double> outputDataSliderMusicDurationNow;
 
   PlayMusicController(this.pathSong) {
     _audioPlayer = AudioPlayer();
@@ -33,6 +36,9 @@ class PlayMusicController {
     streamControllerMusicDurationNow = StreamController();
     inputDataMusicDurationNow = streamControllerMusicDurationNow.sink;
     outputDataMusicDurationNow = streamControllerMusicDurationNow.stream;
+    streamControllerSliderMusicDurationNow = StreamController();
+    inputDataSliderMusicDurationNow = streamControllerSliderMusicDurationNow.sink;
+    outputDataSliderMusicDurationNow = streamControllerSliderMusicDurationNow.stream;
   }
 
   void initAudio() async {
@@ -47,10 +53,32 @@ class PlayMusicController {
       streamControllerMusicTime
           .add(transferDurationToSecondAndMinute(duration!));
       _audioPlayer.onPositionChanged.listen((event) {
-        streamControllerMusicDurationNow.add(
-            transferDurationToSecondAndMinute(event!));
-      });
+
+        streamControllerMusicDurationNow
+            .add(transferDurationToSecondAndMinute(event));
+        streamControllerSliderMusicDurationNow
+            .add(durationToSliderValue(event, duration));
+
+        });
     }
+  }
+
+
+
+  double durationToSliderValue(Duration duration, Duration maxDuration) {
+    // Calculate the total duration in seconds
+    double totalSeconds = duration.inSeconds.toDouble();
+
+    // Calculate the maximum duration in seconds
+    double maxSeconds = maxDuration.inSeconds.toDouble();
+
+    // Normalize the duration to a double between 0 and 1
+    double normalizedValue = totalSeconds / maxSeconds;
+
+    // Ensure the value is within the range [0, 1]
+    normalizedValue = normalizedValue.clamp(0.0, 1.0);
+
+    return normalizedValue;
   }
 
   void disposeAudio() {

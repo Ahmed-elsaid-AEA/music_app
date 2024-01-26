@@ -28,6 +28,9 @@ class PlayMusicController {
   late StreamController<bool> streamControllerLoop;
   late Sink<bool> inputDataLoop;
   late Stream<bool> outputDataLoop;
+  late StreamController<int> streamControllerImageAudio;
+  late Sink<int> inputDataImageAudio;
+  late Stream<int> outputDataImageAudio;
   late Duration durationOfMusic;
   late AudioCache _audioCache;
   late Uri uri;
@@ -52,6 +55,9 @@ class PlayMusicController {
     streamControllerLoop = StreamController();
     inputDataLoop = streamControllerLoop.sink;
     outputDataLoop = streamControllerLoop.stream;
+    streamControllerImageAudio = StreamController();
+    inputDataImageAudio = streamControllerImageAudio.sink;
+    outputDataImageAudio = streamControllerImageAudio.stream;
     loop = false;
   }
 
@@ -161,6 +167,7 @@ class PlayMusicController {
     }
     uri = await _audioCache.load(ConstantsValue.listQuarn[newIndex].pathSong);
     await _audioPlayer.play(UrlSource(uri.toString()));
+    streamControllerImageAudio.add(newIndex);
     changeController();
   }
 
@@ -173,6 +180,7 @@ class PlayMusicController {
     }
     uri = await _audioCache.load(ConstantsValue.listQuarn[newIndex].pathSong);
     await _audioPlayer.play(UrlSource(uri.toString()));
+    streamControllerImageAudio.add(newIndex);
     changeController();
   }
 }

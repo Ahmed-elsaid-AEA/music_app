@@ -9,18 +9,29 @@ import 'package:music_apps/models/songsModel.dart';
 
 class CustomSongsDetailsPlayMusic extends StatelessWidget {
   const CustomSongsDetailsPlayMusic({
-    super.key, required this.index,
+    super.key, required this.index, required this.outputDataImageAudio,
   });
-final int index;
+ final Stream outputDataImageAudio;
+
+  final int index;
+
   @override
   Widget build(BuildContext context) {
-    return Column(children: [  ClipRRect(
+    return Column(children: [ ClipRRect(
       borderRadius: BorderRadius.circular(RadiusValuesManager.r10),
-      child: Image(
-        fit: BoxFit.cover,
-        width: 261,
-        height: 247,
-        image: AssetImage(ConstantsValue.listQuarn[index].image),
+      child:StreamBuilder(
+        stream: outputDataImageAudio,
+        builder: (context, snapShot) {
+          return Image(
+            fit: BoxFit.cover,
+            width: 261,
+            height: 247,
+            image: AssetImage(snapShot.data==null?
+            ConstantsValue.listQuarn[index].image:
+            ConstantsValue.listQuarn[snapShot.data].image
+            ),
+          );
+        },
       ),
     ),
       const SizedBox(height: HeightValuesManagers.h11,),
@@ -38,6 +49,7 @@ final int index;
             color: ColorManagers.kLightWhiteColor,
             fontSize: FontSizeManagers.f12,
             fontWeight: FontWeight.w500),
-      )],);
+      )
+    ],);
   }
 }

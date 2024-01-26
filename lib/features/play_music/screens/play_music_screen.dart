@@ -27,9 +27,8 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
   Widget build(BuildContext context) {
     int indexSongModel = ModalRoute.of(context)!.settings.arguments as int;
 
-    _playMusicController=PlayMusicController(
-         indexSongModel);
-   _playMusicController.initAudio();
+    _playMusicController = PlayMusicController(indexSongModel);
+    _playMusicController.initAudio();
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: CustomAppBarPlayMusicScreen(
@@ -56,6 +55,8 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
               children: [
                 const Spacer(),
                 CustomSongsDetailsPlayMusic(
+                  outputDataImageAudio:
+                      _playMusicController.outputDataImageAudio,
                   index: indexSongModel,
                 ),
                 const SizedBox(
@@ -63,36 +64,37 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
                 ),
                 CustomButtonControllerPlayMusic(
                   onBack: () {
-
                     _playMusicController.backAction(indexSongModel);
-                    if (indexSongModel<=0) {
-                      indexSongModel=ConstantsValue.listQuarn.length-1;
-                      print(indexSongModel);
-                    }else{
-                      indexSongModel=0;
+                    if (indexSongModel <= 0) {
+                      indexSongModel = ConstantsValue.listQuarn.length - 1;
+
+                    } else {
+                      indexSongModel -= 1;
                     }
-                  },onNext: () {
-                  _playMusicController.nextAction(indexSongModel);
-                  if (ConstantsValue.listQuarn.length > indexSongModel+1) {
-                    indexSongModel=indexSongModel+1;
-                  }else{
-                    indexSongModel=0;
-                  }
-
-
+                    print(indexSongModel.toString()+"----------------------");
                   },
-                  seekAudio:
-                  (value) {
+                  onNext: () {
+                    _playMusicController.nextAction(indexSongModel);
+                    if (ConstantsValue.listQuarn.length > indexSongModel + 1) {
+                      indexSongModel = indexSongModel + 1;
+                    } else {
+                      indexSongModel = 0;
+                    }
+                  },
+                  seekAudio: (value) {
                     _playMusicController.seekAudio(value);
                   },
                   audioLoop: () {
                     _playMusicController.audioLoop();
                   },
-                  outputDataLoop:_playMusicController.outputDataLoop ,
-                  outputDataMusicDurationNow: _playMusicController.outputDataMusicDurationNow,
+                  outputDataLoop: _playMusicController.outputDataLoop,
+                  outputDataMusicDurationNow:
+                      _playMusicController.outputDataMusicDurationNow,
                   outputDataMusicTime: _playMusicController.outputDataMusicTime,
-                  outputDataMusicImageStatus: _playMusicController.outputDataMusicImageStatus,
-                  outputDataSliderMusicDurationNow:_playMusicController.outputDataSliderMusicDurationNow ,
+                  outputDataMusicImageStatus:
+                      _playMusicController.outputDataMusicImageStatus,
+                  outputDataSliderMusicDurationNow:
+                      _playMusicController.outputDataSliderMusicDurationNow,
                   onPauseAndResumeAudio: () {
                     _playMusicController.pauseAndResumeAudio();
                   },
@@ -111,6 +113,7 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
       ),
     );
   }
+
   @override
   void dispose() {
     // TODO: implement dispose

@@ -8,41 +8,28 @@ import 'package:music_apps/core/resources/height_values_managers.dart';
 import 'package:music_apps/core/resources/radius_values_managers.dart';
 import 'package:music_apps/core/resources/width_values_managers.dart';
 
-class CustomButtonControllerPlayMusic extends StatefulWidget {
+class CustomButtonControllerPlayMusic extends StatelessWidget {
   const CustomButtonControllerPlayMusic({
     super.key,
     required this.onChanged,
     required this.value,
     required this.pathSong,
+    required this.onPauseAndResumeAudio,
+    required this.outputDataMusicImageStatus,
+    required this.audioLoop, required this.outputDataLoop, required this.outputDataSliderMusicDurationNow, required this.outputDataMusicDurationNow, required this.seekAudio, required this.outputDataMusicTime,
   });
 
   final ValueChanged<double> onChanged;
   final double value;
   final String pathSong;
-
-  @override
-  State<CustomButtonControllerPlayMusic> createState() =>
-      _CustomButtonControllerPlayMusicState();
-}
-
-class _CustomButtonControllerPlayMusicState
-    extends State<CustomButtonControllerPlayMusic> {
-  late PlayMusicController _playMusicController;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _playMusicController = PlayMusicController(widget.pathSong);
-    _playMusicController.initAudio();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _playMusicController.disposeAudio();
-    super.dispose();
-  }
+  final GestureTapCallback onPauseAndResumeAudio;
+  final GestureTapCallback audioLoop;
+  final Stream<bool> outputDataMusicImageStatus;
+  final Stream outputDataLoop;
+  final Stream outputDataSliderMusicDurationNow;
+  final Stream<String> outputDataMusicDurationNow;
+  final Stream<String> outputDataMusicTime;
+  final ValueChanged<double> seekAudio;
 
   @override
   Widget build(BuildContext context) {
@@ -70,14 +57,12 @@ class _CustomButtonControllerPlayMusicState
                     width: WidthValuesManagers.w20,
                     image: AssetImage(AssetsManagers.back))),
             InkWell(
-              onTap: () {
-                _playMusicController.pauseAndResumeAudio();
-              },
+              onTap: onPauseAndResumeAudio,
               child: CircleAvatar(
                 radius: RadiusValuesManager.r30,
                 backgroundColor: ColorManagers.kLightWhiteColor,
                 child: StreamBuilder<bool>(
-                  stream: _playMusicController.outputDataMusicImageStatus,
+                  stream: outputDataMusicImageStatus,
                   builder: (context, snapshot) => Image(
                       width: 30,
                       height: 30,
@@ -105,13 +90,12 @@ class _CustomButtonControllerPlayMusicState
                     height: WidthValuesManagers.w20,
                     image: AssetImage(AssetsManagers.next))),
             InkWell(
-              onTap: () {
-                _playMusicController.audioLoop();
-              },
+              onTap: audioLoop,
               child: StreamBuilder(
-                  stream: _playMusicController.outputDataLoop,
+                  stream: outputDataLoop,
                   builder: (context, snapshot) => Image(
-                    width: 30,height: 30,
+                      width: 30,
+                      height: 30,
                       image: AssetImage(snapshot.data == true
                           ? AssetsManagers.loopActive
                           : AssetsManagers.loopUnActive))),
@@ -124,16 +108,14 @@ class _CustomButtonControllerPlayMusicState
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 26),
           child: StreamBuilder(
-            stream: _playMusicController.outputDataSliderMusicDurationNow,
+            stream: outputDataSliderMusicDurationNow,
             builder: (context, snapshot) => SliderTheme(
               data: SliderThemeData(
                   // thumbShape: RoundSliderThumbShape(),
                   overlayShape: SliderComponentShape.noOverlay),
               child: Slider(
                 value: snapshot.data == null ? 0 : snapshot.data!,
-                onChanged: (value) {
-                  _playMusicController.seekAudio(value);
-                },
+                onChanged: (value) => seekAudio(value),
                 activeColor: ColorManagers.kLightWhiteColor,
                 inactiveColor: const Color(0xff2F5D9A),
               ),
@@ -146,7 +128,7 @@ class _CustomButtonControllerPlayMusicState
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               StreamBuilder<String>(
-                stream: _playMusicController.outputDataMusicDurationNow,
+                stream: outputDataMusicDurationNow,
                 builder: (context, snapshot) => Text(
                   "${snapshot.data}",
                   style: const TextStyle(
@@ -156,7 +138,7 @@ class _CustomButtonControllerPlayMusicState
                 ),
               ),
               StreamBuilder<String>(
-                stream: _playMusicController.outputDataMusicTime,
+                stream: outputDataMusicTime,
                 builder: (context, snapshot) => Text(
                   "${snapshot.data}",
                   style: const TextStyle(

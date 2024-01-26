@@ -21,9 +21,13 @@ class PlayMusicScreen extends StatefulWidget {
 }
 
 class _PlayMusicScreenState extends State<PlayMusicScreen> {
+  late PlayMusicController _playMusicController;
+
   @override
   Widget build(BuildContext context) {
     int indexSongModel = ModalRoute.of(context)!.settings.arguments as int;
+    _playMusicController=PlayMusicController(ConstantsValue.listQuarn[indexSongModel].pathSong);
+   _playMusicController.initAudio();
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: CustomAppBarPlayMusicScreen(
@@ -56,6 +60,21 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
                   height: HeightValuesManagers.h29,
                 ),
                 CustomButtonControllerPlayMusic(
+                  seekAudio:
+                  (value) {
+                    _playMusicController.seekAudio(value);
+                  },
+                  audioLoop: () {
+                    _playMusicController.audioLoop();
+                  },
+                  outputDataLoop:_playMusicController.outputDataLoop ,
+                  outputDataMusicDurationNow: _playMusicController.outputDataMusicDurationNow,
+                  outputDataMusicTime: _playMusicController.outputDataMusicTime,
+                  outputDataMusicImageStatus: _playMusicController.outputDataMusicImageStatus,
+                  outputDataSliderMusicDurationNow:_playMusicController.outputDataSliderMusicDurationNow ,
+                  onPauseAndResumeAudio: () {
+                    _playMusicController.pauseAndResumeAudio();
+                  },
                   pathSong: ConstantsValue.listQuarn[indexSongModel].pathSong,
                   value: .6,
                   onChanged: (value) {
@@ -70,5 +89,11 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _playMusicController.disposeAudio();
+    super.dispose();
   }
 }

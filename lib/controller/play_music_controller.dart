@@ -144,4 +144,5 @@ class PlayMusicController {
       streamControllerLoop.add(true);
     }
   }
+
 }

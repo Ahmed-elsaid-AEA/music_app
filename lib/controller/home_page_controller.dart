@@ -4,7 +4,7 @@ import 'package:music_apps/models/songsModel.dart';
 
 class HomePageController {
   static void navigatorToPlayMusicScreen(
-      {required BuildContext context, required SongsModel data}) {
-    Navigator.pushNamed(context, RoutesName.kPlayMusicScreen, arguments: data);
+      {required BuildContext context, required int index}) {
+    Navigator.pushNamed(context, RoutesName.kPlayMusicScreen, arguments: index);
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:music_apps/controller/play_music_controller.dart';
 import 'package:music_apps/core/resources/alignment_managers.dart';
 import 'package:music_apps/core/resources/color_managers.dart';
+import 'package:music_apps/core/resources/constants_value.dart';
 import 'package:music_apps/core/resources/height_values_managers.dart';
 import 'package:music_apps/features/play_music/widgets/cusotm_button_controller_play_music.dart';
 import 'package:music_apps/features/play_music/widgets/custom_app_bar_play_music_screen.dart';
@@ -20,13 +21,9 @@ class PlayMusicScreen extends StatefulWidget {
 }
 
 class _PlayMusicScreenState extends State<PlayMusicScreen> {
-
-
-
   @override
   Widget build(BuildContext context) {
-    SongsModel songModel =
-        ModalRoute.of(context)!.settings.arguments as SongsModel;
+    int indexSongModel = ModalRoute.of(context)!.settings.arguments as int;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: CustomAppBarPlayMusicScreen(
@@ -53,13 +50,13 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
               children: [
                 const Spacer(),
                 CustomSongsDetailsPlayMusic(
-                  songsModel: songModel,
+                  index: indexSongModel,
                 ),
                 const SizedBox(
                   height: HeightValuesManagers.h29,
                 ),
                 CustomButtonControllerPlayMusic(
-                  pathSong: songModel.pathSong,
+                  pathSong: ConstantsValue.listQuarn[indexSongModel].pathSong,
                   value: .6,
                   onChanged: (value) {
                     print(value);

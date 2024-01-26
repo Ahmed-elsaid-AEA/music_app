@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_apps/core/resources/assets_managers.dart';
 import 'package:music_apps/core/resources/color_managers.dart';
+import 'package:music_apps/core/resources/constants_value.dart';
 import 'package:music_apps/core/resources/font_managers.dart';
 import 'package:music_apps/core/resources/height_values_managers.dart';
 import 'package:music_apps/core/resources/radius_values_managers.dart';
@@ -8,9 +9,9 @@ import 'package:music_apps/models/songsModel.dart';
 
 class CustomSongsDetailsPlayMusic extends StatelessWidget {
   const CustomSongsDetailsPlayMusic({
-    super.key, required this.songsModel,
+    super.key, required this.index,
   });
-final SongsModel songsModel;
+final int index;
   @override
   Widget build(BuildContext context) {
     return Column(children: [  ClipRRect(
@@ -19,12 +20,12 @@ final SongsModel songsModel;
         fit: BoxFit.cover,
         width: 261,
         height: 247,
-        image: AssetImage(songsModel.image),
+        image: AssetImage(ConstantsValue.listQuarn[index].image),
       ),
     ),
       const SizedBox(height: HeightValuesManagers.h11,),
       Text(
-        "${songsModel.song}",
+        ConstantsValue.listQuarn[index].song,
         style: const TextStyle(
             color: ColorManagers.kWhiteColor,
             fontSize: FontSizeManagers.f18,
@@ -32,7 +33,7 @@ final SongsModel songsModel;
       ),
       const SizedBox(height: HeightValuesManagers.h4,),
       Text(
-        songsModel.singer,
+        ConstantsValue.listQuarn[index].singer,
         style: const TextStyle(
             color: ColorManagers.kLightWhiteColor,
             fontSize: FontSizeManagers.f12,

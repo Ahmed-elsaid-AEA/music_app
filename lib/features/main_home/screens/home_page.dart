@@ -44,9 +44,9 @@ class HomePage extends StatelessWidget {
               height: HeightValuesManagers.h22,
             ),
             CustomSearchDetails(
-              onTap: (songsModel) {
+              onTap: (index) {
                 HomePageController.navigatorToPlayMusicScreen(
-                    data: songsModel, context: context);
+                    index: index, context: context);
               },
               itemCount: 3,
               listSongsModel: ConstantsValue.listQuarn,

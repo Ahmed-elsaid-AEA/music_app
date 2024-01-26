@@ -64,6 +64,13 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
                 CustomButtonControllerPlayMusic(
                   onBack: () {
 
+                    _playMusicController.backAction(indexSongModel);
+                    if (indexSongModel<=0) {
+                      indexSongModel=ConstantsValue.listQuarn.length-1;
+                      print(indexSongModel);
+                    }else{
+                      indexSongModel=0;
+                    }
                   },onNext: () {
                   _playMusicController.nextAction(indexSongModel);
                   if (ConstantsValue.listQuarn.length > indexSongModel+1) {

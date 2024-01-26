@@ -60,21 +60,24 @@ class PlayMusicController {
     uri = await _audioCache.load(ConstantsValue.listQuarn[indexMusic].pathSong);
     if (_audioPlayer.state == PlayerState.stopped) {
       await _audioPlayer.play(UrlSource(uri.toString()));
-      isPlaying = true;
-      streamControllerMusicImageStatus.add(isPlaying);
-      Duration? duration = await _audioPlayer.getDuration();
-      durationOfMusic = duration!;
-      streamControllerMusicTime
-          .add(transferDurationToSecondAndMinute(duration!));
-      _audioPlayer.onPositionChanged.listen((event) {
-        streamControllerMusicDurationNow
-            .add(transferDurationToSecondAndMinute(event));
-        streamControllerSliderMusicDurationNow
-            .add(durationToSliderValue(event, duration));
-      });
+      changeController();
     }
   }
+void changeController()async{
+  isPlaying = true;
 
+  streamControllerMusicImageStatus.add(isPlaying);
+  Duration? duration = await _audioPlayer.getDuration();
+  durationOfMusic = duration!;
+  streamControllerMusicTime
+      .add(transferDurationToSecondAndMinute(duration!));
+  _audioPlayer.onPositionChanged.listen((event) {
+    streamControllerMusicDurationNow
+        .add(transferDurationToSecondAndMinute(event));
+    streamControllerSliderMusicDurationNow
+        .add(durationToSliderValue(event, duration));
+  });
+}
   double durationToSliderValue(Duration duration, Duration maxDuration) {
     // Calculate the total duration in seconds
     double totalSeconds = duration.inSeconds.toDouble();
@@ -148,12 +151,18 @@ class PlayMusicController {
     }
   }
 
-  void nextAction() async {
-    if (ConstantsValue.listQuarn.length > indexMusic) {
-      uri = await _audioCache
-          .load(ConstantsValue.listQuarn[indexMusic + 1].pathSong);
-      await _audioPlayer.play(UrlSource(uri.toString()));
+  void nextAction(int index) async {
+
+     int newIndex=0;
+    if (ConstantsValue.listQuarn.length > index+1) {
+     newIndex=index + 1;
+    }else {
+      newIndex=0;
     }
+     uri = await _audioCache
+         .load(ConstantsValue.listQuarn[newIndex].pathSong);
+     await _audioPlayer.play(UrlSource(uri.toString()));
+     changeController();
   }
 
   void backAction() {}

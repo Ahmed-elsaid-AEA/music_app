@@ -26,6 +26,7 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
   @override
   Widget build(BuildContext context) {
     int indexSongModel = ModalRoute.of(context)!.settings.arguments as int;
+
     _playMusicController=PlayMusicController(
          indexSongModel);
    _playMusicController.initAudio();
@@ -64,7 +65,14 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
                   onBack: () {
 
                   },onNext: () {
-                    _playMusicController.nextAction();
+                  _playMusicController.nextAction(indexSongModel);
+                  if (ConstantsValue.listQuarn.length > indexSongModel+1) {
+                    indexSongModel=indexSongModel+1;
+                  }else{
+                    indexSongModel=0;
+                  }
+
+
                   },
                   seekAudio:
                   (value) {

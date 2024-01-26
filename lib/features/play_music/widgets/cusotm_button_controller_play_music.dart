@@ -15,14 +15,23 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
     required this.value,
     required this.pathSong,
     required this.onPauseAndResumeAudio,
+    required this.audioLoop,
+    required this.outputDataLoop,
+    required this.outputDataSliderMusicDurationNow,
+    required this.outputDataMusicDurationNow,
+    required this.seekAudio,
+    required this.outputDataMusicTime,
+    required this.onNext,
+    required this.onBack,
     required this.outputDataMusicImageStatus,
-    required this.audioLoop, required this.outputDataLoop, required this.outputDataSliderMusicDurationNow, required this.outputDataMusicDurationNow, required this.seekAudio, required this.outputDataMusicTime,
   });
 
   final ValueChanged<double> onChanged;
   final double value;
   final String pathSong;
   final GestureTapCallback onPauseAndResumeAudio;
+  final GestureTapCallback onNext;
+  final GestureTapCallback onBack;
   final GestureTapCallback audioLoop;
   final Stream<bool> outputDataMusicImageStatus;
   final Stream outputDataLoop;
@@ -39,23 +48,26 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             const Image(image: AssetImage(AssetsManagers.random)),
-            Container(
-                width: WidthValuesManagers.w36,
-                height: HeightValuesManagers.h36,
-                decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(RadiusValuesManager.r50),
-                    gradient: const LinearGradient(
-                        begin: Alignment(0.00, -1.00),
-                        end: Alignment(0, 1),
-                        colors: [
-                          ColorManagers.kThirdPrimaryColor,
-                          ColorManagers.kLightWhiteColor,
-                        ])),
-                child: const Image(
-                    height: HeightValuesManagers.h20,
-                    width: WidthValuesManagers.w20,
-                    image: AssetImage(AssetsManagers.back))),
+            InkWell(
+              onTap: onBack,
+              child: Container(
+                  width: WidthValuesManagers.w36,
+                  height: HeightValuesManagers.h36,
+                  decoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.circular(RadiusValuesManager.r50),
+                      gradient: const LinearGradient(
+                          begin: Alignment(0.00, -1.00),
+                          end: Alignment(0, 1),
+                          colors: [
+                            ColorManagers.kThirdPrimaryColor,
+                            ColorManagers.kLightWhiteColor,
+                          ])),
+                  child: const Image(
+                      height: HeightValuesManagers.h20,
+                      width: WidthValuesManagers.w20,
+                      image: AssetImage(AssetsManagers.back))),
+            ),
             InkWell(
               onTap: onPauseAndResumeAudio,
               child: CircleAvatar(
@@ -72,23 +84,26 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-                width: HeightValuesManagers.h36,
-                height: WidthValuesManagers.w36,
-                decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(RadiusValuesManager.r50),
-                    gradient: const LinearGradient(
-                        begin: Alignment(0.00, -1.00),
-                        end: Alignment(0, 1),
-                        colors: [
-                          ColorManagers.kThirdPrimaryColor,
-                          ColorManagers.kLightWhiteColor,
-                        ])),
-                child: const Image(
-                    width: WidthValuesManagers.w20,
-                    height: WidthValuesManagers.w20,
-                    image: AssetImage(AssetsManagers.next))),
+            InkWell(
+              onTap: onNext,
+              child: Container(
+                  width: HeightValuesManagers.h36,
+                  height: WidthValuesManagers.w36,
+                  decoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.circular(RadiusValuesManager.r50),
+                      gradient: const LinearGradient(
+                          begin: Alignment(0.00, -1.00),
+                          end: Alignment(0, 1),
+                          colors: [
+                            ColorManagers.kThirdPrimaryColor,
+                            ColorManagers.kLightWhiteColor,
+                          ])),
+                  child: const Image(
+                      width: WidthValuesManagers.w20,
+                      height: WidthValuesManagers.w20,
+                      image: AssetImage(AssetsManagers.next))),
+            ),
             InkWell(
               onTap: audioLoop,
               child: StreamBuilder(

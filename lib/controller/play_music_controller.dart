@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:music_apps/core/resources/constants_value.dart';
 
 class PlayMusicController {
   static void navigatorPop({required BuildContext context}) {
@@ -9,7 +10,7 @@ class PlayMusicController {
   }
 
   late AudioPlayer _audioPlayer;
-  String pathSong;
+  int indexMusic;
   late bool isPlaying;
   late bool loop;
   late StreamController<bool> streamControllerMusicImageStatus;
@@ -28,8 +29,10 @@ class PlayMusicController {
   late Sink<bool> inputDataLoop;
   late Stream<bool> outputDataLoop;
   late Duration durationOfMusic;
+  late AudioCache _audioCache;
+  late Uri uri;
 
-  PlayMusicController(this.pathSong) {
+  PlayMusicController(this.indexMusic) {
     _audioPlayer = AudioPlayer();
     isPlaying = true;
     streamControllerMusicImageStatus = StreamController();
@@ -49,12 +52,12 @@ class PlayMusicController {
     streamControllerLoop = StreamController();
     inputDataLoop = streamControllerLoop.sink;
     outputDataLoop = streamControllerLoop.stream;
-    loop=false;
+    loop = false;
   }
 
   void initAudio() async {
-    AudioCache _aduioCache = AudioCache(prefix: '');
-    Uri uri = await _aduioCache.load(pathSong);
+    _audioCache = AudioCache(prefix: '');
+    uri = await _audioCache.load(ConstantsValue.listQuarn[indexMusic].pathSong);
     if (_audioPlayer.state == PlayerState.stopped) {
       await _audioPlayer.play(UrlSource(uri.toString()));
       isPlaying = true;
@@ -145,4 +148,13 @@ class PlayMusicController {
     }
   }
 
+  void nextAction() async {
+    if (ConstantsValue.listQuarn.length > indexMusic) {
+      uri = await _audioCache
+          .load(ConstantsValue.listQuarn[indexMusic + 1].pathSong);
+      await _audioPlayer.play(UrlSource(uri.toString()));
+    }
+  }
+
+  void backAction() {}
 }

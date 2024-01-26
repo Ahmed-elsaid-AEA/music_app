@@ -26,7 +26,8 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
   @override
   Widget build(BuildContext context) {
     int indexSongModel = ModalRoute.of(context)!.settings.arguments as int;
-    _playMusicController=PlayMusicController(ConstantsValue.listQuarn[indexSongModel].pathSong);
+    _playMusicController=PlayMusicController(
+         indexSongModel);
    _playMusicController.initAudio();
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -60,6 +61,11 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
                   height: HeightValuesManagers.h29,
                 ),
                 CustomButtonControllerPlayMusic(
+                  onBack: () {
+
+                  },onNext: () {
+                    _playMusicController.nextAction();
+                  },
                   seekAudio:
                   (value) {
                     _playMusicController.seekAudio(value);

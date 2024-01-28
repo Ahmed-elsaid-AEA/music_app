@@ -83,6 +83,16 @@ class PlayMusicController {
       streamControllerSliderMusicDurationNow
           .add(durationToSliderValue(event, duration));
     });
+    _audioPlayer.onPlayerComplete.listen((event) {
+      nextAction(indexMusic);
+// indexMusic=indexMusic+1;
+
+      if (indexMusic >= ConstantsValue.listQuarn.length) {
+        indexMusic=0;
+      } else {
+        indexMusic += 1;
+      }
+    });
   }
 
   double durationToSliderValue(Duration duration, Duration maxDuration) {

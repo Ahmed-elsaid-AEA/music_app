@@ -71,7 +71,6 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
                     } else {
                       indexSongModel -= 1;
                     }
-                    print(indexSongModel.toString()+"----------------------");
                   },
                   onNext: () {
                     _playMusicController.nextAction(indexSongModel);

@@ -75,7 +75,6 @@ class PlayMusicController {
       await _audioPlayer.play(UrlSource(uri.toString()));
       changeController();
     }
-
   }
 
   void changeController() async {
@@ -96,20 +95,28 @@ class PlayMusicController {
 // indexMusic=indexMusic+1;
 
       if (indexMusic >= ConstantsValue.listQuarn.length) {
-        indexMusic=0;
+        indexMusic = 0;
       } else {
         indexMusic += 1;
       }
     });
   }
-  void randomAction()async{
+
+  void randomAction() async {
+
     Random r = Random();
     int index = r.nextInt(ConstantsValue.listQuarn.length);
-     print(index);
-    uri = await _audioCache.load(ConstantsValue.listQuarn[index].pathSong);
-    await _audioPlayer.play(UrlSource(uri.toString()));
-    streamControllerImageAudio.add(index);
-    changeController();
+
+    if (indexMusic == index) {
+      print(index.toString() +" without doing ");
+    } else {
+      print(index.toString()+"doing");
+      indexMusic=index;
+      uri = await _audioCache.load(ConstantsValue.listQuarn[index].pathSong);
+      await _audioPlayer.play(UrlSource(uri.toString()));
+      streamControllerImageAudio.add(index);
+      changeController();
+    }
   }
 
   double durationToSliderValue(Duration duration, Duration maxDuration) {

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,9 @@ class PlayMusicController {
   late StreamController<int> streamControllerImageAudio;
   late Sink<int> inputDataImageAudio;
   late Stream<int> outputDataImageAudio;
+  late StreamController<bool> streamControllerRandom;
+  late Sink<bool> inputDataRandom;
+  late Stream<bool> outputDataRandom;
   late Duration durationOfMusic;
   late AudioCache _audioCache;
   late Uri uri;
@@ -58,6 +62,9 @@ class PlayMusicController {
     streamControllerImageAudio = StreamController();
     inputDataImageAudio = streamControllerImageAudio.sink;
     outputDataImageAudio = streamControllerImageAudio.stream;
+    streamControllerRandom = StreamController();
+    inputDataRandom = streamControllerRandom.sink;
+    outputDataRandom = streamControllerRandom.stream;
     loop = false;
   }
 
@@ -68,6 +75,7 @@ class PlayMusicController {
       await _audioPlayer.play(UrlSource(uri.toString()));
       changeController();
     }
+
   }
 
   void changeController() async {
@@ -93,6 +101,15 @@ class PlayMusicController {
         indexMusic += 1;
       }
     });
+  }
+  void randomAction()async{
+    Random r = Random();
+    int index = r.nextInt(ConstantsValue.listQuarn.length);
+     print(index);
+    uri = await _audioCache.load(ConstantsValue.listQuarn[index].pathSong);
+    await _audioPlayer.play(UrlSource(uri.toString()));
+    streamControllerImageAudio.add(index);
+    changeController();
   }
 
   double durationToSliderValue(Duration duration, Duration maxDuration) {

@@ -24,6 +24,7 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
     required this.onNext,
     required this.onBack,
     required this.outputDataMusicImageStatus,
+    required this.outputDataRandom, required this.audioRandom,
   });
 
   final ValueChanged<double> onChanged;
@@ -33,7 +34,9 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
   final GestureTapCallback onNext;
   final GestureTapCallback onBack;
   final GestureTapCallback audioLoop;
+  final GestureTapCallback audioRandom;
   final Stream<bool> outputDataMusicImageStatus;
+  final Stream<bool> outputDataRandom;
   final Stream outputDataLoop;
   final Stream outputDataSliderMusicDurationNow;
   final Stream<String> outputDataMusicDurationNow;
@@ -47,7 +50,14 @@ class CustomButtonControllerPlayMusic extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Image(image: AssetImage(AssetsManagers.random)),
+            InkWell(
+              onTap: audioRandom,
+              child: StreamBuilder(
+                  stream: outputDataRandom,
+                  builder: (context, snapshot) => snapshot.data == null
+                      ? const Image(image: AssetImage(AssetsManagers.random))
+                      : const Image(image: AssetImage(AssetsManagers.play))),
+            ),
             InkWell(
               onTap: onBack,
               child: Container(

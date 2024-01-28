@@ -63,6 +63,10 @@ class _PlayMusicScreenState extends State<PlayMusicScreen> {
                   height: HeightValuesManagers.h29,
                 ),
                 CustomButtonControllerPlayMusic(
+                  audioRandom: () {
+                    _playMusicController.randomAction();
+                  },
+                  outputDataRandom: _playMusicController.outputDataRandom,
                   onBack: () {
                     _playMusicController.backAction(indexSongModel);
                     if (indexSongModel <= 0) {
